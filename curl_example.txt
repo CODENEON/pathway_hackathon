@@ -2,5 +2,11 @@ curl --location 'http://localhost:8000/v2/answer' \
 --header 'accept: */*' \
 --header 'Content-Type: application/json' \
 --data '{
-    "prompt": "Give me highlights of Q3 Financial Summay"
+    "prompt": "What is the time complexity of Quick Sort?"
 }'
+
+curl --location "http://localhost:8008/v2/answer" --header "accept: */*" --header "Content-Type: application/json" --data "{\"prompt\": \"What is the time complexity of QuickSort?\"}"
+
+curl --location "http://localhost:8008/v2/answer" --header "accept: */*" 
+--header "Content-Type: application/json" 
+--data "{\"prompt\": \"What is Shanghai factory?\"}"

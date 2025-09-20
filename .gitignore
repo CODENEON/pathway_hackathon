@@ -2,5 +2,12 @@ llm-app/
 Cache/
 output/
 .env
+
+# UI dependencies and build output
 ui/node_modules/
-.vscode
+ui/dist/
+ui/server/uploads/
+ui/server/documents.db
+
+# IDE-specific
+.vscode/

@@ -4,6 +4,7 @@ import { AuthPage } from './pages/AuthPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { TrainingPage } from './pages/TrainingPage'
 import { LearningSetupPage } from './pages/LearningSetupPage'
+import { DocumentsPage } from './pages/DocumentsPage'
 import { DashboardLayout } from './components/layout/DashboardLayout'
 import { AuthProvider } from './components/AuthProvider'
 import { useAuthStore } from './store'
@@ -76,12 +77,7 @@ export const App: React.FC = () => {
             />
             <Route 
               path="documents" 
-              element={
-                <div className="text-center py-12">
-                  <h2 className="text-2xl font-bold text-charcoal-900 mb-4 font-hand">📚 Document Management</h2>
-                  <p className="text-charcoal-600 font-sketch">Coming soon! Upload and manage your learning materials here.</p>
-                </div>
-              } 
+              element={<DocumentsPage />} 
             />
             <Route 
               path="settings" 

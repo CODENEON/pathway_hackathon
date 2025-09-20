@@ -112,8 +112,7 @@ For more details, see comments in `app.yaml` and [Pathway YAML documentation](ht
 
 ## Running the Application
 
-
-This project has two main components: the Pathway backend and the LearnPro UI frontend.
+This project has two main components: the Pathway backend and the LearnPro UI frontend (which includes an integrated document management API).
 
 ### 1. Running the Backend (Pathway API)
 
@@ -132,7 +131,7 @@ The API will be available at `http://localhost:8008`.
 
 ### 2. Running the Frontend (LearnPro UI)
 
-The frontend is a React application that provides the user interface for the learning platform.
+The frontend is a React application with an integrated document management API that automatically starts together.
 
 **Prerequisites:**
 - Node.js (v18 or newer) and npm.
@@ -142,13 +141,18 @@ The frontend is a React application that provides the user interface for the lea
 # 1. Navigate to the UI directory
 cd ui
 
-# 2. Install all dependencies
+# 2. Install all dependencies (includes both frontend and backend dependencies)
 npm install
 
-# 3. Start the development server
+# 3. Start both the document API server and the UI development server
 npm run dev
 ```
-The UI will be available at `http://localhost:3000` and will connect to the backend API running on port 8008.
+
+This single command will start:
+- Document Management API on `http://localhost:3001`
+- React UI on `http://localhost:3000` (with API proxy)
+
+The UI will automatically connect to both the Pathway API (port 8008) and the integrated document API (port 3001 via proxy).
 
 ---
 

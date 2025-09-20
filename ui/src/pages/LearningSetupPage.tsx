@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../store'
 import { ArrowLeft, Upload, File, X, CheckCircle } from 'lucide-react'
 
 interface UploadedFile {
@@ -7,10 +8,12 @@ interface UploadedFile {
   name: string
   size: number
   type: string
+  file?: File // Keep the File object for upload
 }
 
 export const LearningSetupPage: React.FC = () => {
   const navigate = useNavigate()
+  const { user } = useAuthStore()
   const [currentStep, setCurrentStep] = useState(1)
   const [proficiency, setProficiency] = useState('')
   const [timeline, setTimeline] = useState('')
@@ -77,7 +80,8 @@ export const LearningSetupPage: React.FC = () => {
       id: Math.random().toString(36).substr(2, 9),
       name: file.name,
       size: file.size,
-      type: file.type
+      type: file.type,
+      file: file // Store the actual File object
     }))
     setUploadedFiles(prev => [...prev, ...newFiles])
   }
@@ -124,9 +128,39 @@ export const LearningSetupPage: React.FC = () => {
     }
   }
 
-  const handleStartLearning = () => {
-    // Here you would save the setup data and navigate to training
-    console.log('Setup complete:', { proficiency, timeline, uploadedFiles })
+  const handleStartLearning = async () => {
+    // Upload files to the API if any were selected
+    if (uploadedFiles.length > 0 && user?.id) {
+      try {
+        const uploadPromises = uploadedFiles
+          .filter(file => file.file) // Only upload files that have the File object
+          .map(async (uploadedFile) => {
+            const formData = new FormData()
+            formData.append('document', uploadedFile.file!)
+            formData.append('userId', user.id)
+
+            const response = await fetch('/api/documents/upload', {
+              method: 'POST',
+              body: formData
+            })
+
+            if (!response.ok) {
+              throw new Error(`Failed to upload ${uploadedFile.name}`)
+            }
+
+            return response.json()
+          })
+
+        await Promise.all(uploadPromises)
+        console.log('All files uploaded successfully')
+      } catch (error) {
+        console.error('Error uploading files:', error)
+        alert('Some files failed to upload. You can upload them later from the Documents section.')
+      }
+    }
+
+    // Save setup data and navigate to training
+    console.log('Setup complete:', { proficiency, timeline, uploadedFiles: uploadedFiles.length })
     navigate('/training')
   }
 
