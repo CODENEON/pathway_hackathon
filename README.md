@@ -112,15 +112,43 @@ For more details, see comments in `app.yaml` and [Pathway YAML documentation](ht
 
 ## Running the Application
 
-Make sure your `.env` and YAML files are set up.
 
-```bash
-# Run the main application
-python main.py
+This project has two main components: the Pathway backend and the LearnPro UI frontend.
+
+### 1. Running the Backend (Pathway API)
+
+The backend processes documents and answers questions. The recommended way to run it is with Docker.
+
+**Prerequisites:**
+- Docker Desktop installed and running.
+- A configured `.env` file with your API keys.
+
+**Run Command:**
+```powershell
+# Make sure you are in the root directory of the project
+docker run -it --rm -v %cd%:/app -p 8008:8000 my-pathway-app
 ```
+The API will be available at `http://localhost:8008`.
 
-- By default, the server will start at `http://0.0.0.0:8000`.
-- You can change the host and port in the YAML file.
+### 2. Running the Frontend (LearnPro UI)
+
+The frontend is a React application that provides the user interface for the learning platform.
+
+**Prerequisites:**
+- Node.js (v18 or newer) and npm.
+
+**Run Commands:**
+```powershell
+# 1. Navigate to the UI directory
+cd ui
+
+# 2. Install all dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
+```
+The UI will be available at `http://localhost:3000` and will connect to the backend API running on port 8008.
 
 ---
 
