@@ -2,3 +2,5 @@ llm-app/
 Cache/
 output/
 .env
+ui/node_modules/
+.vscode

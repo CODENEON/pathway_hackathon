@@ -1,6 +1,20 @@
 # Pathway Hackathon: Adaptive RAG Template
 
-This repository provides a ready-to-use Adaptive Retrieval-Augmented Generation (RAG) template using [Pathway](https://pathway.com/). It enables you to build, configure, and run a document-based question-answering system with support for both Gemini and OpenAI models.
+This repository provides a ready-to-use Adaptive Retrieval-Augmented G```bash
+# Linux/Mac
+curl --location 'http://localhost:8008/v2/answer' \
+  --header 'accept: */*' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "prompt": "What is the average package for cse in IIT Bombay?"
+}'
+
+# Windows CMD
+curl --location "http://localhost:8008/v2/answer" --header "accept: */*" --header "Content-Type: application/json" --data "{\"prompt\": \"What is the average package for cse in IIT Bombay?\"}"
+
+# Windows PowerShell
+Invoke-RestMethod -Uri "http://localhost:8008/v2/answer" -Method POST -ContentType "application/json" -Body '{"prompt": "What is the average package for cse in IIT Bombay?"}'
+```n (RAG) template using [Pathway](https://pathway.com/). It enables you to build, configure, and run a document-based question-answering system with support for both Gemini and OpenAI models.
 
 ---
 
@@ -115,11 +129,11 @@ python main.py
 To query the API, use the following cURL command:
 
 ```bash
-curl --location 'http://localhost:8000/v2/answer' \
+curl --location 'http://localhost:8008/v2/answer' \
   --header 'accept: */*' \
   --header 'Content-Type: application/json' \
   --data '{
-    "prompt": "Give me highlights of Q3 Financial Summay"
+    "prompt": "What is the average package for cse in IIT Bombay?"
 }'
 ```
 
